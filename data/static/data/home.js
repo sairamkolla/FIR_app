@@ -14,7 +14,7 @@ app.controller('myctrl',['$scope','$http',function($scope,$http){
         };
 
 
-        $http.post('http://127.0.0.1:8000/data/SubmitFir/',data).then(function(success){
+        $http.post('data/SubmitFir/',data).then(function(success){
                 if(success.data.hasOwnProperty('error')){
                     swal({
                     title:"Warning!",

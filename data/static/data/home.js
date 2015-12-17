@@ -1,7 +1,7 @@
-var app = angular.module('myapp',[]).config(function($interpolateProvider,$httpProvider){
+var app = angular.module('myapp', []).config(function($interpolateProvider,$httpProvider){
     $interpolateProvider.startSymbol('[[').endSymbol(']]');
-    $httpProvider.defaults.xsrfCookieName - 'csrftoken';
-    $httpProvider.defaults.xsrfHeaderName - 'X-CSRFToken';
+    $httpProvider.defaults.xsrfCookieName = 'csrftoken';
+    $httpProvider.defaults.xsrfHeaderName = 'X-CSRFToken';
 });
 
 app.controller('myctrl',['$scope','$http',function($scope,$http){
@@ -28,6 +28,10 @@ app.controller('myctrl',['$scope','$http',function($scope,$http){
                         text:"You have successfully registered and fir!",
                         type:"success"
                     });
+
+                    $scope.name = '';
+                    $scope.address = '';
+                    $scope.description = '';
                 }
             },function(error){
                 swal({
@@ -35,7 +39,6 @@ app.controller('myctrl',['$scope','$http',function($scope,$http){
                     text: "Some error was encountered while submitting your form.Please try after sometime.",
                     type: "error"
                 });
-
         });
     };
 

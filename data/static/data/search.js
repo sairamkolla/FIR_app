@@ -5,16 +5,15 @@ var app = angular.module('myapp', []).config(function($interpolateProvider,$http
 });
 
 app.controller('myctrl',['$scope','$http',function($scope,$http){
-
-    $scope.add = function(){
+    $scope.posts = []
+    $scope.load = function(){
+        $scope.posts = [];
         var data = {
-            'name':$scope.name,
-            'address':$scope.address,
-            'description':$scope.description
+            'datestring':$scope.datestring
         };
 
 
-        $http.post('http://127.0.0.1:8000/data/SubmitFir/',data).then(function(success){
+        $http.post('http://127.0.0.1:8000/data/GetFir/',data).then(function(success){
                 if(success.data.hasOwnProperty('error')){
                     swal({
                     title:"Warning!",
@@ -23,20 +22,21 @@ app.controller('myctrl',['$scope','$http',function($scope,$http){
                     });
                 }
                 else{
-                    swal({
-                        title:"Success!",
-                        text:"You have successfully registered and fir!",
-                        type:"success"
-                    });
+                    $scope.datestring = '';
+                    $scope.posts = success.data
+                    if(success.data.length == 0){
+                        swal({
+                            title:'Oops!',
+                            type:'warning',
+                            text:'There were no FIRs in this date range'
 
-                    $scope.name = '';
-                    $scope.address = '';
-                    $scope.description = '';
+                        });
+                    }
                 }
             },function(error){
                 swal({
                     title: "Error",
-                    text: "Some error was encountered while submitting your form.Please try after sometime.",
+                    text: "Some error was encountered while fetching the FIR's.Please try after sometime.",
                     type: "error"
                 });
         });

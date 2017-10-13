@@ -1,9 +1,9 @@
-from django.conf.urls import url,patterns
+from django.conf.urls import url
+from . import views
 
-urlpatterns = patterns('',
-                       url(r'^search/$','data.views.Search'),
-                       url(r'^home/$','data.views.Home'),
-                       url(r'SubmitFir','data.views.AddFir'),
-                       url(r'GetFir','data.views.GetFir'),
+urlpatterns = [url(r'^search/$',views.Search),
+                       url(r'^home/$',views.Home),
+                       url(r'SubmitFir',views.AddFir),
+                       url(r'GetFir',views.GetFir),
 
-                       )
+                       ]
